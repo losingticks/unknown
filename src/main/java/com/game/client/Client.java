@@ -113,6 +113,9 @@ public class Client implements Runnable
             if (System.currentTimeMillis() - timer > 1000)
             {
                 timer += 1000;
+
+                System.out.println("TPS: " + ticks + ", FPS: " + frames);
+
                 frames = 0;
                 ticks = 0;
             }
