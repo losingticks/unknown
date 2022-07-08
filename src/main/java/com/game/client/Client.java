@@ -4,7 +4,6 @@ import com.game.client.entity.Player;
 import com.game.client.input.KeyHandler;
 import com.game.client.input.MouseHandler;
 import com.game.util.Constants;
-import com.game.util.ImageLoader;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;

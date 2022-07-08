@@ -3,11 +3,9 @@ package com.game.client.entity;
 import com.game.client.Client;
 import com.game.client.input.KeyHandler;
 import com.game.util.Constants;
-import com.game.util.Direction;
 import com.game.util.ImageLoader;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
 
 public class Player
 {
