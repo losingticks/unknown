@@ -10,16 +10,25 @@ public class Sprite
     private final int[] pixels;
     private final int width;
     private final int height;
+    private final int maxWidth;
+    private final int maxHeight;
     private int xOffset = 0;
     private int yOffset = 0;
 
     private BufferedImage cachedImage = null;
 
-    public Sprite(int[] pixels, int width, int height)
+    public Sprite(int[] pixels, int width, int height, int maxWidth, int maxHeight)
     {
         this.pixels = pixels;
         this.width = width;
         this.height = height;
+        this.maxWidth = maxWidth;
+        this.maxHeight = maxHeight;
+    }
+
+    public Sprite(int[] pixels, int width, int height)
+    {
+        this(pixels, width, height, width, height);
     }
 
     public Sprite(BufferedImage img)
@@ -29,6 +38,8 @@ public class Sprite
         this.pixels = img.getRGB(0, 0, w, h, null, 0, w);
         this.width = w;
         this.height = h;
+        this.maxWidth = w;
+        this.maxHeight = h;
     }
 
     public int[] pixels()
@@ -44,6 +55,16 @@ public class Sprite
     public int height()
     {
         return height;
+    }
+
+    public int maxWidth()
+    {
+        return maxWidth;
+    }
+
+    public int maxHeight()
+    {
+        return maxHeight;
     }
 
     public int xOffset()
