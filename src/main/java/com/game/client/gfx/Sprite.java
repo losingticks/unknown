@@ -8,22 +8,22 @@ import java.awt.image.BufferedImage;
 public class Sprite
 {
     private final int[] pixels;
-    private final int width;
-    private final int height;
     private final int maxWidth;
     private final int maxHeight;
+    private int width = -1;
+    private int height = -1;
     private int xOffset = 0;
     private int yOffset = 0;
 
     private BufferedImage cachedImage = null;
 
-    public Sprite(int[] pixels, int width, int height, int maxWidth, int maxHeight)
+    public Sprite(int[] pixels, int maxWidth, int maxHeight, int width, int height)
     {
         this.pixels = pixels;
-        this.width = width;
-        this.height = height;
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
+        this.width = width;
+        this.height = height;
     }
 
     public Sprite(int[] pixels, int width, int height)
@@ -36,25 +36,15 @@ public class Sprite
         int w = img.getWidth();
         int h = img.getHeight();
         this.pixels = img.getRGB(0, 0, w, h, null, 0, w);
-        this.width = w;
-        this.height = h;
         this.maxWidth = w;
         this.maxHeight = h;
+        this.width = w;
+        this.height = h;
     }
 
     public int[] pixels()
     {
         return pixels;
-    }
-
-    public int width()
-    {
-        return width;
-    }
-
-    public int height()
-    {
-        return height;
     }
 
     public int maxWidth()
@@ -65,6 +55,28 @@ public class Sprite
     public int maxHeight()
     {
         return maxHeight;
+    }
+
+    public int width()
+    {
+        return width;
+    }
+
+    public Sprite width(int width)
+    {
+        this.width = width;
+        return this;
+    }
+
+    public int height()
+    {
+        return height;
+    }
+
+    public Sprite height(int height)
+    {
+        this.height = height;
+        return this;
     }
 
     public int xOffset()
@@ -127,8 +139,8 @@ public class Sprite
     {
         if (cachedImage == null)
         {
-            BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-            img.setRGB(0, 0, width, height, pixels, 0, width);
+            BufferedImage img = new BufferedImage(maxWidth, maxHeight, BufferedImage.TYPE_INT_RGB);
+            img.setRGB(0, 0, maxWidth, maxHeight, pixels, 0, maxWidth);
             cachedImage = img;
             return img;
         }

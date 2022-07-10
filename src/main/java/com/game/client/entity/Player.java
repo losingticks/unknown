@@ -1,41 +1,24 @@
 package com.game.client.entity;
 
 import com.game.client.Client;
-import com.game.client.gfx.Sprite;
 import com.game.client.gfx.SpriteSheet;
 import com.game.client.input.KeyHandler;
 import com.game.util.Constants;
 import com.game.util.Direction;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Player implements Renderable
+public class Player extends Actor
 {
     private final Client client;
 
-    private List<Sprite> sprites = new ArrayList<>();
-    private int x = 0;
-    private int y = 0;
-    private int velocity = 4;
-    private Direction facing = Direction.SOUTH;
+    private int t = 0;
+    private int delay = 20;
 
     public Player(Client client)
     {
+        super(SpriteSheet.load("../char.png"));
         this.client = client;
-
-        SpriteSheet spriteSheet = SpriteSheet.loadSpriteSheet("char_sheet.png");
-        List<Sprite> sprites = spriteSheet.getSprites();
-
-        Sprite facingSouth = sprites.get(0);
-        Sprite facingWest = sprites.get(1);
-        Sprite facingEast = new Sprite(facingWest.flip(true, false));
-        Sprite facingNorth = sprites.get(2);
-        this.sprites.add(facingNorth);
-        this.sprites.add(facingEast);
-        this.sprites.add(facingSouth);
-        this.sprites.add(facingWest);
     }
 
     @Override
@@ -45,36 +28,59 @@ public class Player implements Renderable
 
         if (keyHandler.upPressed)
         {
-            y -= velocity;
-            facing = Direction.NORTH;
+            position.setY(position.getY() - velocity);
+            direction = Direction.NORTH;
+            spriteX = 0;
         }
 
         if (keyHandler.downPressed)
         {
-            y += velocity;
-            facing = Direction.SOUTH;
+            position.setY(position.getY() + velocity);
+            direction = Direction.SOUTH;
+            spriteX = 2;
         }
 
         if (keyHandler.rightPressed)
         {
-            x += velocity;
-            facing = Direction.EAST;
+            position.setX(position.getX() + velocity);
+            direction = Direction.EAST;
+            spriteX = 1;
         }
 
         if (keyHandler.leftPressed)
         {
-            x -= velocity;
-            facing = Direction.WEST;
+            position.setX(position.getX() - velocity);
+            direction = Direction.WEST;
+            spriteX = 3;
+        }
+
+        if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.rightPressed || keyHandler.leftPressed)
+        {
+            t++;
+
+            if (t % delay == 0)
+            {
+                if (spriteY == 0 || spriteY == 1)
+                {
+                    spriteY++;
+                }
+                else if (spriteY == 2)
+                {
+                    spriteY--;
+                }
+            }
+        }
+        else
+        {
+            t = 0;
+            spriteY = 0;
         }
     }
 
     @Override
     public void render(Graphics2D g)
     {
-        int idx = facing.getId() - 1;
-        Sprite sprite = sprites.get(idx);
-        BufferedImage img = sprite.asBufferedImage();
-
-        g.drawImage(img, x, y, Constants.SPRITE_SCALED_SIZE, Constants.SPRITE_SCALED_SIZE, null);
+        BufferedImage img = spriteSheet.getSprite(spriteX, spriteY).asBufferedImage();
+        g.drawImage(img, (int) position.getX(), (int) position.getY(), Constants.SPRITE_SCALED_SIZE, Constants.SPRITE_SCALED_SIZE, null);
     }
 }

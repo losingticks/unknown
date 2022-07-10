@@ -3,57 +3,49 @@ package com.game.client.gfx;
 import com.game.util.Constants;
 import com.game.util.ImageLoader;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SpriteSheet
 {
     private final Sprite sprite;
-    private final List<Sprite> sprites = new ArrayList<>();
+    private final int rows, cols;
+    private final Sprite[][] spriteMap;
 
-    public SpriteSheet(BufferedImage sheet)
+    public SpriteSheet(BufferedImage img)
     {
-        this.sprite = new Sprite(sheet);
-        loadSprites();
-    }
+        this.sprite = new Sprite(img).width(Constants.SPRITE_SIZE).height(Constants.SPRITE_SIZE);
+        this.rows = sprite.maxHeight() / sprite.height();
+        this.cols = sprite.maxWidth() / sprite.width();
+        this.spriteMap = new Sprite[rows][cols];
 
-    private void loadSprites()
-    {
-        BufferedImage img = sprite.asBufferedImage();
-        int y = 0;
-
-        for (int r = 0; r < (sprite.height() / Constants.SPRITE_SIZE); r++)
+        for (int row = 0; row < rows; row++)
         {
-            int x = 0;
-
-            for (int c = 0; c < (sprite.width() / Constants.SPRITE_SIZE); c++)
+            for (int col = 0; col < cols; col++)
             {
-                sprites.add(new Sprite(img.getSubimage(x, y, Constants.SPRITE_SIZE, Constants.SPRITE_SIZE)));
-                x += Constants.SPRITE_SIZE;
+                spriteMap[row][col] = crop(col, row);
             }
-
-            y += Constants.SPRITE_SIZE;
         }
     }
 
-    public static SpriteSheet loadSpriteSheet(String path)
+    private Sprite crop(int x, int y, int width, int height)
     {
-        BufferedImage spriteSheet = ImageLoader.loadImage("../" + path);
-        return new SpriteSheet(spriteSheet);
+        BufferedImage img = sprite.asBufferedImage().getSubimage(x, y, width, height);
+        return new Sprite(img);
     }
 
-    public List<Sprite> getSprites()
+    private Sprite crop(int gridX, int gridY)
     {
-        return sprites;
+        int w = sprite.width();
+        int h = sprite.height();
+        return crop(gridX * w, gridY * h, w, h);
     }
 
-    public Sprite getSprite(int index)
+    public Sprite getSprite(int x, int y)
     {
-        return sprites.get(index);
+        return spriteMap[y][x];
     }
 
-    public int size()
+    public static SpriteSheet load(String path)
     {
-        return sprites.size();
+        return new SpriteSheet(ImageLoader.loadImage(path));
     }
 }
