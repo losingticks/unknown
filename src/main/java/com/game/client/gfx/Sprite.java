@@ -139,7 +139,7 @@ public class Sprite
     {
         if (cachedImage == null)
         {
-            BufferedImage img = new BufferedImage(maxWidth, maxHeight, BufferedImage.TYPE_INT_RGB);
+            BufferedImage img = new BufferedImage(maxWidth, maxHeight, BufferedImage.TYPE_INT_ARGB);
             img.setRGB(0, 0, maxWidth, maxHeight, pixels, 0, maxWidth);
             cachedImage = img;
             return img;
