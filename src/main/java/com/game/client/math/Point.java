@@ -1,23 +1,19 @@
 package com.game.client.math;
 
-public class Point
+public interface Point<T extends Point<T>>
 {
-    private final int x;
-    private final int y;
+    T set(int x, int y);
+    T set(T t);
 
-    public Point(int x, int y)
-    {
-        this.x = x;
-        this.y = y;
-    }
+    T add(int x, int y);
+    T add(T t);
 
-    public int getX()
-    {
-        return x;
-    }
+    T sub(int x, int y);
+    T sub(T t);
 
-    public int getY()
-    {
-        return y;
-    }
+    T mul(int x, int y);
+    T mul(T t);
+
+    T div(int x, int y);
+    T div(T t);
 }

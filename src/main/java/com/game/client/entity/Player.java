@@ -28,28 +28,27 @@ public class Player extends Actor
 
         if (keyHandler.upPressed)
         {
-            position.setY(position.getY() - velocity);
+            position.sub(0, velocity);
             direction = Direction.NORTH;
             spriteX = 0;
         }
 
         if (keyHandler.downPressed)
         {
-            position.setY(position.getY() + velocity);
+            position.add(0, velocity);
             direction = Direction.SOUTH;
             spriteX = 2;
         }
 
         if (keyHandler.rightPressed)
         {
-            position.setX(position.getX() + velocity);
+            position.add(velocity, 0);
             direction = Direction.EAST;
             spriteX = 1;
         }
-
-        if (keyHandler.leftPressed)
+        else if (keyHandler.leftPressed)
         {
-            position.setX(position.getX() - velocity);
+            position.sub(velocity, 0);
             direction = Direction.WEST;
             spriteX = 3;
         }
@@ -81,6 +80,6 @@ public class Player extends Actor
     public void render(Graphics2D g)
     {
         BufferedImage img = spriteSheet.getSprite(spriteX, spriteY).asBufferedImage();
-        g.drawImage(img, (int) position.getX(), (int) position.getY(), Constants.SPRITE_SCALED_SIZE, Constants.SPRITE_SCALED_SIZE, null);
+        g.drawImage(img, position.x, position.y, Constants.SPRITE_SCALED_SIZE, Constants.SPRITE_SCALED_SIZE, null);
     }
 }
