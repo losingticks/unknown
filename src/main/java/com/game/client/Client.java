@@ -3,11 +3,18 @@ package com.game.client;
 import com.game.client.entity.Player;
 import com.game.client.input.KeyHandler;
 import com.game.client.input.MouseHandler;
+import com.game.client.map.TileManager;
 import com.game.util.Constants;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Composite;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Paint;
+import java.awt.RenderingHints;
+import java.awt.Stroke;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -27,6 +34,7 @@ public class Client implements Runnable
     private final int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     // --
 
+    private TileManager tileManager = null;
     private Player player = null;
 
     public Client()
@@ -36,6 +44,7 @@ public class Client implements Runnable
         this.mouseHandler = new MouseHandler(this);
         init();
 
+        tileManager = new TileManager(this);
         player = new Player(this);
     }
 
@@ -126,6 +135,7 @@ public class Client implements Runnable
 
     private void update()
     {
+        tileManager.update();
         player.update();
     }
 
@@ -136,12 +146,17 @@ public class Client implements Runnable
         if (bs == null)
         {
             canvas.createBufferStrategy(3);
+            canvas.requestFocus();
             return;
         }
 
         Graphics2D g = (Graphics2D) bs.getDrawGraphics();
-        g.drawImage(image, 0, 0, Constants.WIDTH, Constants.HEIGHT, null);
 
+        g.clearRect(0, 0, Constants.WIDTH, Constants.HEIGHT);
+        g.setColor(Color.GRAY);
+        g.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT);
+
+        tileManager.render(g);
         player.render(g);
 
         g.dispose();
