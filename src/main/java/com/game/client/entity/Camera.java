@@ -6,11 +6,12 @@ import java.awt.Rectangle;
 public class Camera
 {
     private Vector2f position = null;
-    private Rectangle bounds = new Rectangle();
+    private Rectangle bounds = null;
 
-    public Camera(Vector2f position)
+    public Camera(Vector2f position, Rectangle bounds)
     {
         this.position = position;
+        this.bounds = bounds;
     }
 
     public Vector2f getPosition()
@@ -27,26 +28,8 @@ public class Camera
 
         if (bounds != null)
         {
-            float x = position.getX();
-            float y = position.getY();
-
-            if (x < bounds.x)
-            {
-                x = bounds.x;
-            }
-            if (x > bounds.width)
-            {
-                x = bounds.width;
-            }
-            if (y < bounds.y)
-            {
-                y = bounds.y;
-            }
-            if (y > bounds.height)
-            {
-                y = bounds.height;
-            }
-
+            int x = Math.max(bounds.x, Math.min((int) position.getX(), bounds.width));
+            int y = Math.max(bounds.y, Math.min((int) position.getY(), bounds.height));
             this.position = new Vector2f(x, y);
             return;
         }

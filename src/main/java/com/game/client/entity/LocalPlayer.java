@@ -11,23 +11,21 @@ import java.awt.Rectangle;
 
 public class LocalPlayer extends Actor
 {
-    private static final Vector2f CENTER = new Vector2f(
-            (float) (Constants.WIDTH / 2) - (float) (Constants.SPRITE_SCALED_SIZE / 2),
-            (float) (Constants.HEIGHT / 2) - (float) (Constants.SPRITE_SCALED_SIZE / 2)
-    );
-
     private final Client client;
 
-    public Camera camera;
+    public final Camera camera;
     private Direction direction = Direction.SOUTH;
+
+    public LocalPlayer(Client client, Vector2f initial)
+    {
+        super(initial, 1.0f, 1.0f);
+        this.client = client;
+        this.camera = new Camera(initial, new Rectangle(0, 0, 30 * 64 - Constants.WIDTH, 30 * 64 - Constants.HEIGHT));
+    }
 
     public LocalPlayer(Client client)
     {
-        super(CENTER, 1.0f, 1.0f);
-        this.client = client;
-
-        camera = new Camera(CENTER);
-        camera.setBounds(new Rectangle(0, 0, 30*64-Constants.WIDTH, 30*64-Constants.HEIGHT));
+        this(client, new Vector2f((float) (Constants.WIDTH / 2) - (float) (Constants.SPRITE_SCALED_SIZE / 2), (float) (Constants.HEIGHT / 2) - (float) (Constants.SPRITE_SCALED_SIZE / 2)));
     }
 
     @Override
@@ -66,13 +64,11 @@ public class LocalPlayer extends Actor
             vec = vec.add(new Vector2f(-1, 0));
         }
 
-        float dist = (float) velocity * 12;
+        float dist = (float) velocity * 16;
         position = position.add(vec.normalized().mul(dist));
         position = Vector2f.max(new Vector2f(0, 0), Vector2f.min(position, new Vector2f(30*64-64, 30*64-64)));
 
-        int cx = (getX() + Constants.SPRITE_SCALED_SIZE / 2) - Constants.WIDTH / 2;
-        int cy = (getY() + Constants.SPRITE_SCALED_SIZE / 2) - Constants.HEIGHT / 2;
-        camera.setPosition(new Vector2f(cx, cy));
+        updateCameraPosition();
     }
 
     @Override
@@ -81,5 +77,15 @@ public class LocalPlayer extends Actor
         Vector2f v = position.sub(camera.getPosition());
         g.setColor(Color.MAGENTA);
         g.fillRect((int) v.getX(), (int) v.getY(), Constants.SPRITE_SCALED_SIZE, Constants.SPRITE_SCALED_SIZE);
+    }
+
+    private void updateCameraPosition()
+    {
+        int size = Constants.SPRITE_SCALED_SIZE / 2;
+        Vector2f position = new Vector2f(
+                getX() + size - Constants.WIDTH_HALF,
+                getY() + size - Constants.HEIGHT_HALF
+        );
+        camera.setPosition(position);
     }
 }
