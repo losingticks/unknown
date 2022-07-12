@@ -1,6 +1,6 @@
 package com.game.client;
 
-import com.game.client.entity.Player;
+import com.game.client.entity.LocalPlayer;
 import com.game.client.input.KeyHandler;
 import com.game.client.input.MouseHandler;
 import com.game.client.tiles.TileManager;
@@ -33,7 +33,7 @@ public class Client implements Runnable
     private final TileManager tileManager = TileManager.getInstance();
     private final TileRenderer tileRenderer;
 
-    private Player player = null;
+    public LocalPlayer player = null;
 
     public Client()
     {
@@ -43,7 +43,7 @@ public class Client implements Runnable
         init();
 
         tileRenderer = new TileRenderer(this);
-        player = new Player(this);
+        player = new LocalPlayer(this);
     }
 
     private synchronized void init()

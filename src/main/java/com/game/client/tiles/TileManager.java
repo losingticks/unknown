@@ -1,7 +1,7 @@
 package com.game.client.tiles;
 
 import com.game.client.gfx.SpriteSheet;
-import com.game.client.math.Point2D;
+import com.game.client.math.Vector2i;
 import com.game.util.Constants;
 import java.awt.Dimension;
 import java.io.BufferedReader;
@@ -30,7 +30,7 @@ public final class TileManager
     public final SpriteSheet spriteSheet;
     public final List<Tile> tiles = new ArrayList<>();
 
-    private final int SIZE = 12;
+    private final int SIZE = 30;
 
     private TileManager()
     {
@@ -57,7 +57,7 @@ public final class TileManager
 
                     Tile tile = new Tile(spriteSheet.getSprite(tileType, 0));
                     tile.setSize(new Dimension(Constants.SPRITE_SCALED_SIZE, Constants.SPRITE_SCALED_SIZE));
-                    tile.setPosition(new Point2D(screenX, screenY));
+                    tile.setPosition(new Vector2i(screenX, screenY));
                     add(tile);
                 }
             }

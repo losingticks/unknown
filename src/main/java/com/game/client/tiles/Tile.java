@@ -1,14 +1,14 @@
 package com.game.client.tiles;
 
 import com.game.client.gfx.Sprite;
-import com.game.client.math.Point2D;
+import com.game.client.math.Vector2i;
 import java.awt.Dimension;
 
 public class Tile
 {
     private final Sprite sprite;
     private Dimension size = null;
-    private Point2D position = null;
+    private Vector2i position = null;
 
     public Tile(Sprite sprite)
     {
@@ -30,12 +30,12 @@ public class Tile
         this.size = size;
     }
 
-    public Point2D getPosition()
+    public Vector2i getPosition()
     {
         return position;
     }
 
-    public void setPosition(Point2D position)
+    public void setPosition(Vector2i position)
     {
         this.position = position;
     }
