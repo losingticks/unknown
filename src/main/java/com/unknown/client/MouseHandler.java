@@ -1,6 +1,6 @@
-package com.game.client.input;
+package com.unknown.client;
 
-import com.game.client.Client;
+import com.unknown.client.main.Client;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;

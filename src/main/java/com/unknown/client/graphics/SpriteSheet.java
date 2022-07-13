@@ -1,7 +1,7 @@
-package com.game.client.gfx;
+package com.unknown.client.graphics;
 
-import com.game.util.Constants;
-import com.game.util.ImageLoader;
+import com.unknown.util.Constants;
+import com.unknown.util.ImageLoader;
 import java.awt.image.BufferedImage;
 
 public class SpriteSheet

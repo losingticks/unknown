@@ -1,11 +1,11 @@
-package com.game.client;
+package com.unknown.client.main;
 
-import com.game.client.entity.LocalPlayer;
-import com.game.client.input.KeyHandler;
-import com.game.client.input.MouseHandler;
-import com.game.client.tiles.TileManager;
-import com.game.client.tiles.TileRenderer;
-import com.game.util.Constants;
+import com.unknown.client.KeyboardHandler;
+import com.unknown.client.MouseHandler;
+import com.unknown.client.player.types.LocalPlayer;
+import com.unknown.client.tiles.TileManager;
+import com.unknown.client.tiles.TileRenderer;
+import com.unknown.util.Constants;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 public class Client implements Runnable
 {
     private final Canvas canvas;
-    private final KeyHandler keyHandler;
+    private final KeyboardHandler keyboardHandler;
     private final MouseHandler mouseHandler;
 
     private Thread thread = null;
@@ -38,7 +38,7 @@ public class Client implements Runnable
     public Client()
     {
         this.canvas = new Canvas();
-        this.keyHandler = new KeyHandler(this);
+        this.keyboardHandler = new KeyboardHandler(this);
         this.mouseHandler = new MouseHandler(this);
         init();
 
@@ -56,7 +56,7 @@ public class Client implements Runnable
         canvas.setPreferredSize(dimension);
 
         // Listeners
-        canvas.addKeyListener(keyHandler);
+        canvas.addKeyListener(keyboardHandler);
         canvas.addMouseListener(mouseHandler);
 
         JFrame frame = new JFrame();
@@ -165,9 +165,9 @@ public class Client implements Runnable
         return canvas;
     }
 
-    public KeyHandler getKeyHandler()
+    public KeyboardHandler getKeyboardHandler()
     {
-        return keyHandler;
+        return keyboardHandler;
     }
 
     public MouseHandler getMouseHandler()

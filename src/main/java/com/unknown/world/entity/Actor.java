@@ -1,8 +1,9 @@
-package com.game.client.entity;
+package com.unknown.world.entity;
 
-import com.game.client.math.Vector2f;
+import com.unknown.client.math.Vector2f;
+import java.awt.Graphics2D;
 
-public abstract class Actor implements Renderable
+public abstract class Actor
 {
     protected Vector2f position;
     protected float radius;
@@ -32,4 +33,7 @@ public abstract class Actor implements Renderable
 
     public abstract int getX();
     public abstract int getY();
+
+    public abstract void update();
+    public abstract void render(Graphics2D g);
 }

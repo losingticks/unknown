@@ -1,10 +1,10 @@
-package com.game.client.tiles;
+package com.unknown.client.tiles;
 
-import com.game.client.Client;
-import com.game.client.entity.LocalPlayer;
-import com.game.client.gfx.Sprite;
-import com.game.client.math.Vector2f;
-import com.game.client.math.Vector2i;
+import com.unknown.client.graphics.Sprite;
+import com.unknown.client.main.Client;
+import com.unknown.client.math.Vector2f;
+import com.unknown.client.math.Vector2i;
+import com.unknown.client.player.types.LocalPlayer;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.util.Collection;

@@ -1,10 +1,12 @@
-package com.game.client.entity;
+package com.unknown.client.player.types;
 
-import com.game.client.Client;
-import com.game.client.input.KeyHandler;
-import com.game.client.math.Vector2f;
-import com.game.util.Constants;
-import com.game.util.Direction;
+import com.unknown.client.Camera;
+import com.unknown.client.KeyboardHandler;
+import com.unknown.client.main.Client;
+import com.unknown.client.math.Vector2f;
+import com.unknown.util.Constants;
+import com.unknown.util.Direction;
+import com.unknown.world.entity.Actor;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -14,12 +16,14 @@ public class LocalPlayer extends Actor
     private final Client client;
 
     public final Camera camera;
+
     private Direction direction = Direction.SOUTH;
 
     public LocalPlayer(Client client, Vector2f initial)
     {
         super(initial, 1.0f, 1.0f);
         this.client = client;
+
         this.camera = new Camera(initial, new Rectangle(0, 0, 30 * 64 - Constants.WIDTH, 30 * 64 - Constants.HEIGHT));
     }
 
@@ -43,7 +47,7 @@ public class LocalPlayer extends Actor
     @Override
     public void update()
     {
-        KeyHandler keyHandler = client.getKeyHandler();
+        KeyboardHandler keyHandler = client.getKeyboardHandler();
 
         Vector2f vec = new Vector2f(0.0f, 0.0f);
 

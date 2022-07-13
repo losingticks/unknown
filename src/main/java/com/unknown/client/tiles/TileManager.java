@@ -1,8 +1,8 @@
-package com.game.client.tiles;
+package com.unknown.client.tiles;
 
-import com.game.client.gfx.SpriteSheet;
-import com.game.client.math.Vector2i;
-import com.game.util.Constants;
+import com.unknown.client.graphics.SpriteSheet;
+import com.unknown.client.math.Vector2i;
+import com.unknown.util.Constants;
 import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.IOException;

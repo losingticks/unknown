@@ -1,4 +1,4 @@
-package com.game.client;
+package com.unknown.client.main;
 
 public class GameName
 {

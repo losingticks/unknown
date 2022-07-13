@@ -1,8 +1,8 @@
-package com.game.util;
+package com.unknown.util;
 
 public final class Constants
 {
-    public static final String NAME = "2D Game";
+    public static final String NAME = "Unknown";
     public static final int WIDTH = 720;
     public static final int WIDTH_HALF = WIDTH / 2;
     public static final int HEIGHT = 576;

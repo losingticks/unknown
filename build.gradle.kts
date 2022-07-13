@@ -2,8 +2,8 @@ plugins {
     java
 }
 
-group = "com.losingticks"
-version = "1.0-SNAPSHOT"
+group = "com.unknown"
+version = "1.0"
 
 repositories {
     mavenCentral()

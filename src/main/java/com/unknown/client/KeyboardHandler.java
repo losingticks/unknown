@@ -1,13 +1,12 @@
-package com.game.client.input;
+package com.unknown.client;
 
-import com.game.client.Client;
+import com.unknown.client.main.Client;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public final class KeyHandler extends KeyAdapter
+public final class KeyboardHandler extends KeyAdapter
 {
     private final Client client;
-    private final ClipboardManager clipboardManager;
 
     // this implementation is just temporary
     public boolean upPressed = false;
@@ -16,10 +15,9 @@ public final class KeyHandler extends KeyAdapter
     public boolean leftPressed = false;
     public boolean shiftPressed = false;
 
-    public KeyHandler(Client client)
+    public KeyboardHandler(Client client)
     {
         this.client = client;
-        this.clipboardManager = new ClipboardManager();
     }
 
     @Override

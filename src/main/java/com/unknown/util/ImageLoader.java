@@ -1,4 +1,4 @@
-package com.game.util;
+package com.unknown.util;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

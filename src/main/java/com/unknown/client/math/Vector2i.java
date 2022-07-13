@@ -1,4 +1,4 @@
-package com.game.client.math;
+package com.unknown.client.math;
 
 public class Vector2i implements Vector<Vector2i>
 {

@@ -1,4 +1,4 @@
-package com.game.client.math;
+package com.unknown.client.math;
 
 public interface Vector<T extends Vector<T>>
 {

@@ -1,7 +1,7 @@
-package com.game.client.tiles;
+package com.unknown.client.tiles;
 
-import com.game.client.gfx.Sprite;
-import com.game.client.math.Vector2i;
+import com.unknown.client.graphics.Sprite;
+import com.unknown.client.math.Vector2i;
 import java.awt.Dimension;
 
 public class Tile

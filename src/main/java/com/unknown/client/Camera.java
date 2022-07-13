@@ -1,9 +1,9 @@
-package com.game.client.entity;
+package com.unknown.client;
 
-import com.game.client.math.Vector2f;
+import com.unknown.client.math.Vector2f;
 import java.awt.Rectangle;
 
-public class Camera
+public final class Camera
 {
     private Vector2f position = null;
     private Rectangle bounds = null;
